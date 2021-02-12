@@ -21,11 +21,11 @@ jobs:
           resource-group: shera-discord
           image: itzg/minecraft-server:java15
           dns-name-label: shera-discord-minecraft
-          environment-variables: EULA=true TZ=America/Toronto TYPE=SPIGOT
+          environment-variables: EULA=true TZ=America/Toronto TYPE=SPIGOT MAX_MEMORY=2G
           ports: 25565
           cpu: 2
           memory: 2
-          gitrepo-url: https://github.com/berwyn/shera-discord-minecraft.git
-          gitrepo-revision: main
-          gitrepo-dir: '.'
-          gitrepo-mount-path: /data
+          azure-file-volume-account-key: ${{ secrets.AZURE_FILE_KEY }}
+          azure-file-volume-account-name: sheradiscord
+          azure-file-volume-share-name: minecraft
+          azure-file-volume-mount-path: /data
