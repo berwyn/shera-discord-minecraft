@@ -27,5 +27,5 @@ jobs:
           memory: 2
           gitrepo-url: https://github.com/berwyn/shera-discord-minecraft.git
           gitrepo-revision: main
-          gitrepo-dir: config
+          gitrepo-dir: '.'
           gitrepo-mount-path: /data
