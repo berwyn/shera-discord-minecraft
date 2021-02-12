@@ -1,0 +1,31 @@
+on: [push]
+name: Deploy ACI containers
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Deploy ACI containers'
+        uses: azure/aci-deploy@v1
+        with:
+          name: minecraft
+          location: canadacentral
+          resource-group: shera-discord
+          image: itzg/minecraft-server:java15
+          dns-name-label: shera-discord-minecraft
+          environment-variables: EULA=true TZ=America/Toronto TYPE=SPIGOT
+          ports: 25565
+          cpu: 2
+          memory: 2
+          gitrepo-dir: config
+          gitrepo-revision: main
+          gitrepo-url: https://github.com/berwyn/shera-discord-minecraft.git
+          gitrepo-mount-path: /data
